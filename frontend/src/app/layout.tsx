@@ -1,6 +1,9 @@
+/* oxlint-disable react/only-export-components */
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import './globals.css'
+import './styles/globals.css'
+import Footer from './components/footer'
+import NavBar from './components/navbar'
 
 export const metadata: Metadata = {
   title: 'Process Tracker',
@@ -14,7 +17,13 @@ type RootLayoutProps = Readonly<{
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-slate-50 text-slate-950">
+        <div className="flex min-h-screen flex-col">
+          <NavBar />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </div>
+      </body>
     </html>
   )
 }
