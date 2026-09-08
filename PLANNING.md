@@ -1,44 +1,46 @@
-# Planejamento
+# Planning
 
-1. Ler e interpretar a demanda em inglês, que não é meu idioma principal. Até o momento, não foi necessário buscar nenhuma tradução para a leitura. Terei que escrever em inglês a documentação, o que é uma dificuldade e devo recorrer a uma tradução.
+[Read the original Portuguese version](PLANNING_original.md)
 
-2. Compreendi que o projeto terá que haver frontend e backend no mesmo repositório. Por tanto, decidi criar uma pasta para cada: `/frontend` onde terá os recursos para React com TypeScript e a pasta `/backend` para rodar o Python.
+1. Read and interpret the requirements in English, which is not my first language. So far, I have not needed to search for any translation. I will have to write the documentation in English, which is a challenge and may require some translation support.
 
-3. O projeto pede Python para o Backend, tenho mais prática com TypeScript  então terei que revisar videos e pesquisar para aplica-la da melhor forma.
+2. I understood that the project should have a frontend and a backend in the same repository. Because of that, I decided to create one folder for each: `/frontend` for the React and TypeScript resources, and `/backend` for Python.
 
-4. Considerei utilizar o Vite no frontend, porém optei pelo Next.js pela praticidade, familiaridade com a tecnologia e pelos recursos oferecidos pelo framework. Além de proporcionar uma estrutura moderna e organizada para React e suas rotas/páginas. Também optei por utilizar Tailwind CSS para estilizar o frontend, pois acredito que deixará a criação dos componentes mais prática.
+3. The project requires Python for the backend. I have more experience with TypeScript, so I will need to review some material and research the best way to apply it.
 
-5. Pretendo fazer o site com um visual clean, parecido com meus outros projetos, como: https://maissocioludo-front.vercel.app/.
+4. I considered using Vite for the frontend, but chose Next.js because it is practical, familiar to me, and offers useful framework features. It also provides a modern and organized structure for React routes and pages. I also chose Tailwind CSS because I believe it will make component creation more practical.
 
-6. No backend, pretendo utilizar FastAPI para criar os endpoints da API. As requisições serão armazenadas em memória, como solicitado, provavelmente utilizando um dicionário onde o identificador da requisição será utilizado como chave.
+5. I plan to build the site with a clean visual style, similar to some of my other projects, such as https://maissocioludo-front.vercel.app/.
 
-7. O processamento não poderá bloquear a API. Então, após a criação de uma requisição, o backend deverá retornar rapidamente o ID e o status inicial, enquanto o processamento continuará em segundo plano e atualizará progressivamente o status, progresso, logs e resultado armazenados.
+6. For the backend, I plan to use FastAPI to create the API endpoints. Requests will be stored in memory, as requested, probably using a dictionary where the request identifier is the key.
 
-8. Na tela de detalhes, o frontend deverá consultar o backend em um intervalo de tempo para atualizar o progresso da requisição. Deve parar quando a requisição chegar em um status final:  `completed` ou `error`.
+7. Processing must not block the API. After a request is created, the backend should quickly return the ID and initial status, while processing continues in the background and progressively updates the stored status, progress, logs, and result.
 
-9. Uma dificuldade que espero encontrar será o cancelamento de uma requisição enquanto ela estiver sendo processada. Será necessário garantir que o processamento consiga identificar que houve um cancelamento e não continue alterando os dados da requisição depois disso.
+8. On the details screen, the frontend should query the backend at regular intervals to update the request progress. It should stop when the request reaches a final status: `completed` or `error`.
 
-10. Também pretendo separar os tipos retornados pela API em interfaces ou types no frontend, evitando o uso de `any` e garantindo principalmente a tipagem dos possíveis valores de status.
+9. One challenge I expect is cancelling a request while it is being processed. The processing must be able to identify that the request was cancelled and avoid changing its data after that.
 
-## Problema
+10. I also plan to separate the types returned by the API into frontend interfaces or types, avoiding `any` and keeping the possible status values typed.
 
-Algumas operações precisam de um tempo para serem concluídas, como o processamento dos dados e validações. Assim, o usuário pode ficar esperando o processo acontecer pra ter algum tipo de retorno, como ficar parado em uma tela parada, o que não é atrativo. Então, retornar pro usuário um resultado rápido e enquanto espera, retornar sinais de progressão é o ideal.
+## Problem
 
-Então eu devo: Receber os dados enviados pelo usuário, garantir que o backend receba rapidamente, que tudo rode em segundo plano e que o usuário possa ver o progresso de 0 a 100%, ler as logs e o status final.
+Some operations take time to finish, such as data processing and validation. The user should not have to wait on a frozen screen without feedback. Returning an immediate response and showing progress while the process runs is a better experience.
 
-## Fluxo esperado
+The project should receive the data sent by the user, respond quickly, run the work in the background, and let the user see progress from 0 to 100%, read the logs, and view the final status.
 
-O usuário deverá enviar uma lista de números através do frontend. O frontend enviará esses dados para o backend através do endpoint de criação.
+## Expected flow
 
-O backend deverá criar a requisição inicialmente como `pending`, armazená-la em memória e iniciar o processamento em segundo plano, retornando imediatamente para o frontend o identificador da requisição e seu status.
+The user should send a list of numbers through the frontend. The frontend will send this data to the backend through the creation endpoint.
 
-Durante o processamento, a requisição deverá passar pelos passos definidos no problema, atualizando o progresso e adicionando novos logs.
+The backend should initially create the request with the `pending` status, store it in memory, and start background processing, immediately returning the request identifier and status to the frontend.
 
-O frontend poderá utilizar o ID recebid para acessar a página de detalhes da requisição. Nessa página, serão feitas consultas periódicas ao backend para acompanhar o andamento até que o processamento seja concluído ou ocorra algum erro.
+During processing, the request should go through the steps defined in the problem, updating its progress and adding new logs.
 
-## Estrutura inicial
+The frontend can use the received ID to open the request details page. On that page, it will periodically query the backend to follow the process until it is completed or an error occurs.
 
-A estrutura inicial que pretendo seguir será:
+## Initial structure
+
+The initial structure I plan to follow is:
 
 ```
 frontend/
