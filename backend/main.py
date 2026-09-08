@@ -6,7 +6,11 @@ app = FastAPI(title="Process Tracker API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:5173",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -15,7 +19,7 @@ app.add_middleware(
 
 @app.get("/")
 def root() -> dict[str, str]:
-    return {"message": "Process Tracker API"}
+    return {"message": "Process Tracker API", "author": "Flávio Soares"}
 
 
 @app.get("/health")
