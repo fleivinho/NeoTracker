@@ -1,10 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { API_URL } from '../../constants'
 
 type ApiStatus = 'checking' | 'available' | 'unavailable'
-
-const API_URL = 'http://localhost:8000'
 
 const statusStyles: Record<
   ApiStatus,

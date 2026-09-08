@@ -1,4 +1,3 @@
-/* oxlint-disable react/only-export-components */
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import './styles/globals.css'
@@ -6,7 +5,7 @@ import Footer from './components/footer'
 import NavBar from './components/navbar'
 
 export const metadata: Metadata = {
-  title: 'Process Tracker',
+  title: 'NeoTracker',
   description: 'Process Tracker frontend',
 }
 

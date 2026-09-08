@@ -1,14 +1,17 @@
 import Link from 'next/link'
-import { PiArrowRight, PiCheckCircle, PiClock, PiWarningCircle } from 'react-icons/pi'
+import {
+  PiArrowRight,
+  PiCheckCircle,
+  PiClock,
+  PiWarningCircle,
+  PiXCircle,
+} from 'react-icons/pi'
 import type { Request, RequestStatus } from '../../../types/request'
 
 export type RequestCardProps = Pick<
   Request,
-  'id' | 'progress' | 'result' | 'status'
-> & {
-  numbers: number[]
-  updatedAt: string
-}
+  'id' | 'numbers' | 'progress' | 'result' | 'status'
+>
 
 const statusStyles: Record<
   RequestStatus,
@@ -34,14 +37,19 @@ const statusStyles: Record<
     label: 'Error',
     badge: 'bg-red-100 text-red-700',
   },
+  cancelled: {
+    icon: PiXCircle,
+    label: 'Cancelled',
+    badge: 'bg-amber-100 text-amber-700',
+  },
 }
 
 export default function RequestCard({
   id,
   numbers,
+  progress,
   result,
   status,
-  updatedAt,
 }: RequestCardProps) {
   const { badge, icon: StatusIcon, label } = statusStyles[status]
 
@@ -63,11 +71,20 @@ export default function RequestCard({
         </span>
       </div>
 
-      <div className="mt-5 flex items-center justify-between gap-4 border-t border-slate-100 pt-4">
-        <div>
-          <p className="text-xs text-slate-400">Updated</p>
-          <p className="mt-1 text-sm text-slate-600">{updatedAt}</p>
+      <div className="mt-5 border-t border-slate-100 pt-4">
+        <div className="flex items-center justify-between text-xs text-slate-500">
+          <span>Progress</span>
+          <span>{progress}%</span>
         </div>
+        <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+          <div
+            className="h-full rounded-full bg-blue-600 transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+
+      <div className="mt-4 flex justify-end">
         {result !== null && (
           <div className="text-right">
             <p className="text-xs text-slate-400">Result</p>
