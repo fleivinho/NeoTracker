@@ -6,17 +6,19 @@
 
 3. O projeto pede Python para o Backend, tenho mais prática com TypeScript  então terei que revisar videos e pesquisar para aplica-la da melhor forma.
 
-4. Considerei utilizar o Vite no frontend, porém optei pelo Next.js pela praticidade, familiaridade com a tecnologia e pelos recursos oferecidos pelo framework. Além de proporcionar uma estrutura moderna e organizada para React e suas rotas/páginas.
+4. Considerei utilizar o Vite no frontend, porém optei pelo Next.js pela praticidade, familiaridade com a tecnologia e pelos recursos oferecidos pelo framework. Além de proporcionar uma estrutura moderna e organizada para React e suas rotas/páginas. Também optei por utilizar Tailwind CSS para estilizar o frontend, pois acredito que deixará a criação dos componentes mais prática.
 
-5. No backend, pretendo utilizar FastAPI para criar os endpoints da API. As requisições serão armazenadas em memória, como solicitado, provavelmente utilizando um dicionário onde o identificador da requisição será utilizado como chave.
+5. Pretendo fazer o site com um visual clean, parecido com meus outros projetos, como: https://maissocioludo-front.vercel.app/.
 
-6. O processamento não poderá bloquear a API. Então, após a criação de uma requisição, o backend deverá retornar rapidamente o ID e o status inicial, enquanto o processamento continuará em segundo plano e atualizará progressivamente o status, progresso, logs e resultado armazenados.
+6. No backend, pretendo utilizar FastAPI para criar os endpoints da API. As requisições serão armazenadas em memória, como solicitado, provavelmente utilizando um dicionário onde o identificador da requisição será utilizado como chave.
 
-7. Na tela de detalhes, o frontend deverá consultar o backend em um intervalo de tempo para atualizar o progresso da requisição. Deve parar quando a requisição chegar em um status final:  `completed` ou `error`.
+7. O processamento não poderá bloquear a API. Então, após a criação de uma requisição, o backend deverá retornar rapidamente o ID e o status inicial, enquanto o processamento continuará em segundo plano e atualizará progressivamente o status, progresso, logs e resultado armazenados.
 
-8. Uma dificuldade que espero encontrar será o cancelamento de uma requisição enquanto ela estiver sendo processada. Será necessário garantir que o processamento consiga identificar que houve um cancelamento e não continue alterando os dados da requisição depois disso.
+8. Na tela de detalhes, o frontend deverá consultar o backend em um intervalo de tempo para atualizar o progresso da requisição. Deve parar quando a requisição chegar em um status final:  `completed` ou `error`.
 
-9. Também pretendo separar os tipos retornados pela API em interfaces ou types no frontend, evitando o uso de `any` e garantindo principalmente a tipagem dos possíveis valores de status.
+9. Uma dificuldade que espero encontrar será o cancelamento de uma requisição enquanto ela estiver sendo processada. Será necessário garantir que o processamento consiga identificar que houve um cancelamento e não continue alterando os dados da requisição depois disso.
+
+10. Também pretendo separar os tipos retornados pela API em interfaces ou types no frontend, evitando o uso de `any` e garantindo principalmente a tipagem dos possíveis valores de status.
 
 ## Problema
 
